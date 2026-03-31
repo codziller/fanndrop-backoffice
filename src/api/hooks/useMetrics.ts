@@ -16,14 +16,28 @@ import {
   DEMO_ACTIVITY_FEED,
 } from '@/data/demo/metrics';
 import type { DateFilter } from '@/types/api';
+import type {
+  ActivityEvent,
+  ContentDistributionItem,
+  ContentEngagement,
+  DropPackageSales,
+  EngagementSnapshot,
+  OverviewMetrics,
+  PaymentChannelBreakdown,
+  RevenueDataPoint,
+  TopArtist,
+  TopCampaign,
+  TransactionDataPoint,
+  UserAcquisitionDataPoint,
+} from '@/types/models';
 
 const USE_DEMO = import.meta.env.VITE_USE_DEMO === 'true';
 const METRICS_STALE = 2 * 60 * 1000;
 
 export function useOverviewMetrics(filter: DateFilter) {
-  return useQuery({
+  return useQuery<OverviewMetrics>({
     queryKey: ['metrics', 'overview', filter],
-    queryFn: async () => {
+    queryFn: async (): Promise<OverviewMetrics> => {
       if (USE_DEMO) return DEMO_OVERVIEW_METRICS;
       const { data } = await apiClient.get(ENDPOINTS.METRICS.OVERVIEW, { params: filter });
       return data.data;
@@ -33,9 +47,9 @@ export function useOverviewMetrics(filter: DateFilter) {
 }
 
 export function useRevenueChart(filter: DateFilter) {
-  return useQuery({
+  return useQuery<RevenueDataPoint[]>({
     queryKey: ['metrics', 'revenue', filter],
-    queryFn: async () => {
+    queryFn: async (): Promise<RevenueDataPoint[]> => {
       if (USE_DEMO) return DEMO_REVENUE_CHART;
       const { data } = await apiClient.get(ENDPOINTS.METRICS.REVENUE, { params: filter });
       return data.data;
@@ -45,9 +59,9 @@ export function useRevenueChart(filter: DateFilter) {
 }
 
 export function useUserAcquisition(filter: DateFilter) {
-  return useQuery({
+  return useQuery<UserAcquisitionDataPoint[]>({
     queryKey: ['metrics', 'user-acquisition', filter],
-    queryFn: async () => {
+    queryFn: async (): Promise<UserAcquisitionDataPoint[]> => {
       if (USE_DEMO) return DEMO_USER_ACQUISITION;
       const { data } = await apiClient.get(ENDPOINTS.METRICS.USER_ACQUISITION, { params: filter });
       return data.data;
@@ -57,9 +71,9 @@ export function useUserAcquisition(filter: DateFilter) {
 }
 
 export function useContentDistribution(filter: DateFilter) {
-  return useQuery({
+  return useQuery<ContentDistributionItem[]>({
     queryKey: ['metrics', 'content-distribution', filter],
-    queryFn: async () => {
+    queryFn: async (): Promise<ContentDistributionItem[]> => {
       if (USE_DEMO) return DEMO_CONTENT_DISTRIBUTION;
       const { data } = await apiClient.get(ENDPOINTS.METRICS.CONTENT_DISTRIBUTION, { params: filter });
       return data.data;
@@ -69,9 +83,9 @@ export function useContentDistribution(filter: DateFilter) {
 }
 
 export function useTopArtists(filter: DateFilter) {
-  return useQuery({
+  return useQuery<TopArtist[]>({
     queryKey: ['metrics', 'top-artists', filter],
-    queryFn: async () => {
+    queryFn: async (): Promise<TopArtist[]> => {
       if (USE_DEMO) return DEMO_TOP_ARTISTS;
       const { data } = await apiClient.get(ENDPOINTS.METRICS.TOP_ARTISTS, { params: filter });
       return data.data;
@@ -81,9 +95,9 @@ export function useTopArtists(filter: DateFilter) {
 }
 
 export function useTopCampaigns(filter: DateFilter) {
-  return useQuery({
+  return useQuery<TopCampaign[]>({
     queryKey: ['metrics', 'top-campaigns', filter],
-    queryFn: async () => {
+    queryFn: async (): Promise<TopCampaign[]> => {
       if (USE_DEMO) return DEMO_TOP_CAMPAIGNS;
       const { data } = await apiClient.get(ENDPOINTS.METRICS.TOP_CAMPAIGNS, { params: filter });
       return data.data;
@@ -93,9 +107,9 @@ export function useTopCampaigns(filter: DateFilter) {
 }
 
 export function useDropPackageSales(filter: DateFilter) {
-  return useQuery({
+  return useQuery<DropPackageSales[]>({
     queryKey: ['metrics', 'drop-package-sales', filter],
-    queryFn: async () => {
+    queryFn: async (): Promise<DropPackageSales[]> => {
       if (USE_DEMO) return DEMO_DROP_PACKAGE_SALES;
       const { data } = await apiClient.get(ENDPOINTS.METRICS.DROP_PACKAGE_SALES, { params: filter });
       return data.data;
@@ -105,9 +119,9 @@ export function useDropPackageSales(filter: DateFilter) {
 }
 
 export function useTopContent(filter: DateFilter) {
-  return useQuery({
+  return useQuery<ContentEngagement[]>({
     queryKey: ['metrics', 'top-content', filter],
-    queryFn: async () => {
+    queryFn: async (): Promise<ContentEngagement[]> => {
       if (USE_DEMO) return DEMO_TOP_CONTENT;
       const { data } = await apiClient.get(ENDPOINTS.METRICS.ENGAGEMENT, { params: filter });
       return data.data;
@@ -117,9 +131,9 @@ export function useTopContent(filter: DateFilter) {
 }
 
 export function useEngagementSnapshot(filter: DateFilter) {
-  return useQuery({
+  return useQuery<EngagementSnapshot>({
     queryKey: ['metrics', 'engagement-snapshot', filter],
-    queryFn: async () => {
+    queryFn: async (): Promise<EngagementSnapshot> => {
       if (USE_DEMO) return DEMO_ENGAGEMENT_SNAPSHOT;
       const { data } = await apiClient.get(ENDPOINTS.METRICS.ENGAGEMENT, { params: filter });
       return data.data;
@@ -129,9 +143,9 @@ export function useEngagementSnapshot(filter: DateFilter) {
 }
 
 export function useTransactions(filter: DateFilter) {
-  return useQuery({
+  return useQuery<TransactionDataPoint[]>({
     queryKey: ['metrics', 'transactions', filter],
-    queryFn: async () => {
+    queryFn: async (): Promise<TransactionDataPoint[]> => {
       if (USE_DEMO) return DEMO_TRANSACTIONS;
       const { data } = await apiClient.get(ENDPOINTS.METRICS.TRANSACTIONS, { params: filter });
       return data.data;
@@ -141,9 +155,9 @@ export function useTransactions(filter: DateFilter) {
 }
 
 export function usePaymentChannels(filter: DateFilter) {
-  return useQuery({
+  return useQuery<PaymentChannelBreakdown[]>({
     queryKey: ['metrics', 'payment-channels', filter],
-    queryFn: async () => {
+    queryFn: async (): Promise<PaymentChannelBreakdown[]> => {
       if (USE_DEMO) return DEMO_PAYMENT_CHANNELS;
       const { data } = await apiClient.get(ENDPOINTS.METRICS.PAYMENT_CHANNELS, { params: filter });
       return data.data;
@@ -153,9 +167,9 @@ export function usePaymentChannels(filter: DateFilter) {
 }
 
 export function useRecentActivity() {
-  return useQuery({
+  return useQuery<ActivityEvent[]>({
     queryKey: ['metrics', 'activity'],
-    queryFn: async () => {
+    queryFn: async (): Promise<ActivityEvent[]> => {
       if (USE_DEMO) return DEMO_ACTIVITY_FEED;
       const { data } = await apiClient.get(ENDPOINTS.METRICS.RECENT_ACTIVITY);
       return data.data;

@@ -415,9 +415,9 @@ function FeatureFlagsTab({ settings }: FeatureFlagsTabProps) {
 
 const editPackageSchema = z.object({
   name: z.string().min(1, 'Name is required'),
-  drops: z.number({ invalid_type_error: 'Enter a valid number' }).int().positive('Must be positive'),
-  priceNaira: z.number({ invalid_type_error: 'Enter a valid number' }).positive('Must be positive'),
-  chargesNaira: z.number({ invalid_type_error: 'Enter a valid number' }).nonnegative('Must be 0 or more'),
+  drops: z.number({ error: 'Enter a valid number' }).int().positive('Must be positive'),
+  priceNaira: z.number({ error: 'Enter a valid number' }).positive('Must be positive'),
+  chargesNaira: z.number({ error: 'Enter a valid number' }).nonnegative('Must be 0 or more'),
   active: z.boolean(),
 });
 
