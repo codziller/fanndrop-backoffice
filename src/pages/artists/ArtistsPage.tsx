@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { ColumnDef } from '@tanstack/react-table';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, MoreVertical, Download, CheckCircle2 } from 'lucide-react';
+import { Search, MoreVertical, Download } from 'lucide-react';
 import toast from 'react-hot-toast';
 import {
   useArtists,

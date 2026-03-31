@@ -61,7 +61,10 @@ function AreaChartInner({ data, isLoading = false }: AreaChartProps) {
           }}
           labelStyle={{ color: '#CDD5DF' }}
           itemStyle={{ color: '#6ACDA3' }}
-          formatter={(v: number) => [`₦${v.toLocaleString('en-NG')}`, 'Revenue']}
+          formatter={(value) => {
+            const amount = typeof value === 'number' ? value : Number(value ?? 0);
+            return [`₦${amount.toLocaleString('en-NG')}`, 'Revenue'];
+          }}
         />
 
         <Area

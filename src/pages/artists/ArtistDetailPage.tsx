@@ -229,7 +229,7 @@ function ActionsPanel({
             size="sm"
             className="w-full"
             onClick={onSuspend}
-            disabled={isMutating || artist.status === 'suspended'}
+            disabled={isMutating}
           >
             Suspend Artist
           </Button>

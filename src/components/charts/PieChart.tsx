@@ -6,7 +6,6 @@ import {
   Cell,
   Tooltip,
 } from 'recharts';
-import type { TooltipProps } from 'recharts';
 import { Skeleton } from '@/components/ui/Skeleton';
 
 interface PieDataItem {
@@ -41,11 +40,20 @@ function getColor(type: string, index: number): string {
   return COLOR_MAP[type] ?? FALLBACK_COLORS[index % FALLBACK_COLORS.length];
 }
 
-function CustomTooltip({ active, payload }: TooltipProps<number, string>) {
+interface PieTooltipEntry {
+  payload: PieDataItem;
+}
+
+interface PieTooltipProps {
+  active?: boolean;
+  payload?: PieTooltipEntry[];
+}
+
+function CustomTooltip({ active, payload }: PieTooltipProps) {
   if (!active || !payload || payload.length === 0) return null;
 
   const item = payload[0];
-  const data = item.payload as PieDataItem;
+  const data = item.payload;
 
   return (
     <div

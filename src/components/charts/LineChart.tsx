@@ -9,7 +9,6 @@ import {
   Tooltip,
   Legend,
 } from 'recharts';
-import type { LegendProps } from 'recharts';
 import { Skeleton } from '@/components/ui/Skeleton';
 
 interface LineChartProps {
@@ -22,13 +21,16 @@ interface LegendPayloadItem {
   color: string;
 }
 
-function renderCustomLegend(props: LegendProps) {
-  const { payload } = props;
+interface LegendContentProps {
+  payload?: LegendPayloadItem[];
+}
+
+function CustomLegend({ payload }: LegendContentProps) {
   if (!payload) return null;
 
   return (
     <div className="flex items-center justify-center gap-6 mt-2">
-      {(payload as LegendPayloadItem[]).map((entry) => (
+      {payload.map((entry) => (
         <div key={entry.value} className="flex items-center gap-1.5">
           <span
             style={{ backgroundColor: entry.color }}
@@ -79,13 +81,17 @@ function LineChartInner({ data, isLoading = false }: LineChartProps) {
           }}
           labelStyle={{ color: '#CDD5DF' }}
           itemStyle={{ color: '#CDD5DF' }}
-          formatter={(value: number, name: string) => [
-            value.toLocaleString('en-NG'),
-            name.charAt(0).toUpperCase() + name.slice(1),
-          ]}
+          formatter={(value, name) => {
+            const amount = typeof value === 'number' ? value : Number(value ?? 0);
+            const label = String(name ?? '');
+            return [
+              amount.toLocaleString('en-NG'),
+              label.charAt(0).toUpperCase() + label.slice(1),
+            ];
+          }}
         />
 
-        <Legend content={renderCustomLegend} />
+        <Legend content={<CustomLegend />} />
 
         <Line
           type="monotone"
