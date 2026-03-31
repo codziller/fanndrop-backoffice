@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(wc -l \"C:/Users/HP/Documents/fanndrop/fanndrop-admin/src/components/ui/\"*.tsx)",
+      "Bash(npx tsc:*)",
+      "Bash(for f:*)",
+      "Bash(do)",
+      "Read(//c/Users/HP/Documents/fanndrop/fanndrop-admin/**)",
+      "Bash(echo \"MISSING: $f\")",
+      "Bash(done)",
+      "Bash(wc -l /c/Users/HP/Documents/fanndrop/fanndrop-admin/src/pages/**/*.tsx)",
+      "Bash(mkdir -p /c/Users/HP/Documents/fanndrop/fanndrop-admin/src/pages/artists)",
+      "Bash(mkdir -p /c/Users/HP/Documents/fanndrop/fanndrop-admin/src/pages/fans)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/)"
+    ]
+  }
+}
